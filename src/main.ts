@@ -6,6 +6,10 @@ import { Button, Picker, Toast } from "vant";
 Vue.use(Button)
   .use(Picker)
   .use(Toast);
+
+const FastClick = require("fastclick");
+FastClick.attach(document.body);
+
 Vue.config.productionTip = false;
 
 new Vue({

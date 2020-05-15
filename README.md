@@ -74,4 +74,35 @@ module.exports = {
     }
   }
 };
+// 换成如此导入将会报错
+import autoprefixer from 'autoprefixer';
+```
+
+## 4.移动端点击延迟
+
+- 当项目使用 typescript 的时候，fastclick 模块 import 引入找不到
+- 可换成@types/fastclick，但需要修改 node_modules 内文件
+
+```js
+// 安装fastclick插件
+cnpm i fastclick -D
+// main.ts中进行全局引入
+// import FastClick from "fastclick"
+const FastClick = require('fastclick');
+FastClick.attach(document.body)
+
+// 换用@types/fastclick插件
+cnpm i @types/fastclick -D
+// 需修改node_modules内文件
+declare module "fastclick" {
+  // function fastclick(layer: any, options?: FastClickOptions): FastClickObject;
+  // namespace fastclick {
+  //     var FastClick: FastClickStatic;
+  // }
+  var FastClick: FastClickStatic;//改成这行代码
+  export = FastClick;
+}
+// main.ts中进行全局引入
+import FastClick from "fastclick"
+FastClick.attach(document.body)
 ```
